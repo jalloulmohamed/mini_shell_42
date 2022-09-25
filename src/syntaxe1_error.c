@@ -6,7 +6,7 @@
 /*   By: mjalloul <mjalloul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 00:03:05 by mjalloul          #+#    #+#             */
-/*   Updated: 2022/09/25 14:48:44 by mjalloul         ###   ########.fr       */
+/*   Updated: 2022/09/25 15:56:15 by mjalloul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	sub_shell(char *line)
 			j = i;
 			while (j != -1)
 			{
-				if (line[j] == '<')
+				if (line[j] == '<' || line[i] == '>')
 					return (1);
 				j--;
 			}
