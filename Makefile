@@ -6,7 +6,7 @@
 #    By: mjalloul <mjalloul@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/13 16:37:17 by babkar            #+#    #+#              #
-#    Updated: 2022/09/24 13:22:05 by mjalloul         ###   ########.fr        #
+#    Updated: 2022/09/25 17:06:21 by mjalloul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = cc
 
 NAME = minishell
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
 SRC = minishell.c \
 	src/sh_execute.c \
@@ -89,7 +89,7 @@ $(BUILD_DIR)/%.c.o: %.c
 	$(CC) $(FLAGS) $(CPPFLAGS) -c $< -o $@
 	
 $(NAME) : $(OBJ)
-		$(CC) $(LDFLAGS) $(OBJ) -o $(NAME) -lreadline
+		$(CC) -g -fsanitize=address $(LDFLAGS) $(OBJ) -o $(NAME) -lreadline
 
 clean:
 		rm -rf $(BUILD_DIR)

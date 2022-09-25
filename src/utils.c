@@ -6,7 +6,7 @@
 /*   By: mjalloul <mjalloul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 00:54:44 by mjalloul          #+#    #+#             */
-/*   Updated: 2022/09/24 00:57:57 by mjalloul         ###   ########.fr       */
+/*   Updated: 2022/09/25 17:03:43 by mjalloul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@ int	b_e(char *line, int index)
 	int	i;
 
 	i = index;
-	while (i)
+	if (i > 0)
 	{
-		if (line[i] != ' ')
-			return (i);
-		i--;
+		while (i)
+		{
+			if (line[i] != ' ')
+				return (i);
+			i--;
+		}
 	}
 	return (index);
 }
