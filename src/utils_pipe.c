@@ -6,7 +6,7 @@
 /*   By: mjalloul <mjalloul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 01:07:34 by mjalloul          #+#    #+#             */
-/*   Updated: 2022/09/24 01:23:16 by mjalloul         ###   ########.fr       */
+/*   Updated: 2022/09/25 17:48:38 by mjalloul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_pid	*new_pid(int ptr)
 	p = (t_pid *)malloc(sizeof(t_pid));
 	if (!p)
 		return (0);
+	add_to_garbage(p);
 	p->p = ptr;
 	p->next = NULL;
 	return (p);
