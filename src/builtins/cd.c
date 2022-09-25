@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babkar <babkar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mjalloul <mjalloul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 20:36:09 by babkar            #+#    #+#             */
-/*   Updated: 2022/09/23 16:23:06 by babkar           ###   ########.fr       */
+/*   Updated: 2022/09/25 14:33:24 by mjalloul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	check_path(char *path)
 
 	if (stat(path, &sb) == -1)
 		return (puterr("No such file or directory", 1));
+	if (S_ISREG (sb.st_mode))
+		return (puterr("cd: not a directory", 1));
 	return (0);
 }
 

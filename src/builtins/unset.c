@@ -6,7 +6,7 @@
 /*   By: mjalloul <mjalloul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:15:03 by babkar            #+#    #+#             */
-/*   Updated: 2022/09/24 16:22:17 by mjalloul         ###   ########.fr       */
+/*   Updated: 2022/09/25 14:24:48 by mjalloul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	delete_node(t_env **head, t_env *del)
 {
 	if (!del->previous)
 	{
-		(*head)->next->previous = NULL;
+		if ((*head)->next)
+			(*head)->next->previous = NULL;
 		*head = del->next;
 	}
 	else if (!del->next)
@@ -32,8 +33,6 @@ void	delete_node(t_env **head, t_env *del)
 		del->next->previous = del->previous;
 		del->previous->next = del->next;
 	}
-	free(del->name);
-	free(del->value);
 	free(del);
 }
 

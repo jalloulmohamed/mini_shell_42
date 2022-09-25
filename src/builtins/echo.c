@@ -6,7 +6,7 @@
 /*   By: mjalloul <mjalloul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 20:39:51 by babkar            #+#    #+#             */
-/*   Updated: 2022/09/24 20:11:42 by mjalloul         ###   ########.fr       */
+/*   Updated: 2022/09/25 15:35:01 by mjalloul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	print_args(t_smpcmd smpcmd)
 		printf("\n");
 }
 
-int	only_this_character(char *line, char c)
+int	only_char(char *line, char c)
 {
 	int	i;
 
@@ -45,38 +45,51 @@ int	only_this_character(char *line, char c)
 	return (0);
 }
 
-t_smpcmd	check_option(t_smpcmd smpcmd)
+t_smpcmd	insert_option(t_smpcmd scmd)
 {
 	int		i;
 	int		j;
 
 	j = 0;
 	i = 0;
-	while (smpcmd.args->next && smpcmd.args->token[0] == '-'
-		&& !only_this_character(ft_strtrim(smpcmd.args->next->token, 1,
-				ft_strlen(smpcmd.args->next->token)), 'n'))
-		smpcmd.args = smpcmd.args->next;
-	printf("%s\n", smpcmd.args->token);
-	if (smpcmd.args->token[0] == '-')
+	if (scmd.args->token[0] == '-' && !only_char(ft_strtrim(scmd.args->token, \
+	1, ft_strlen(scmd.args->token)), 'n'))
 	{
 		i++;
-		while (smpcmd.args->token[i] && smpcmd.args->token[i] == 'n')
+		while (scmd.args->token[i] && scmd.args->token[i] == 'n')
 		{
 			j++;
 			i++;
 		}
-		if (j && smpcmd.args->token[i] == '\0')
+		if (j && scmd.args->token[i] == '\0')
 		{
-			smpcmd.option = "-n";
-			smpcmd.args = smpcmd.args->next;
+			scmd.option = "-n";
+			scmd.args = scmd.args->next;
 		}
-	}
-	return (smpcmd);
+	}	
+	return (scmd);
+}
+
+t_smpcmd	check_option(t_smpcmd scmd)
+{
+	char	*token;
+	char	*next_token;
+
+	token = ft_strtrim(scmd.args->token, 1, ft_strlen(scmd.args->token));
+	if (scmd.args->next)
+		next_token = ft_strtrim(scmd.args->next->token, \
+		1, ft_strlen(scmd.args->next->token));
+	while (scmd.args->next && scmd.args->token[0] == '-'
+		&& scmd.args->next->token[0] == '-' && !only_char(next_token, 'n')
+		&& !only_char(token, 'n'))
+		scmd.args = scmd.args->next;
+	scmd = insert_option(scmd);
+	return (scmd);
 }
 
 int	echo(t_smpcmd smpcmd)
 {
-	if (!smpcmd.args)
+	if (smpcmd.args == NULL)
 	{
 		printf("\n");
 		return (2);

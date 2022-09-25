@@ -6,7 +6,7 @@
 /*   By: mjalloul <mjalloul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 00:03:05 by mjalloul          #+#    #+#             */
-/*   Updated: 2022/09/24 00:10:11 by mjalloul         ###   ########.fr       */
+/*   Updated: 2022/09/25 14:48:44 by mjalloul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ int	sub_shell(char *line)
 	{
 		if (line[i] == '(')
 		{
-			if (line[i + 1] == ')')
+			if (line[a_e(line, i + 1)] == ')')
 				return (1);
 			j = i;
-			while (j != 0)
+			while (j != -1)
 			{
 				if (line[j] == '<')
 					return (1);
@@ -95,7 +95,8 @@ int	sub_shell(char *line)
 	return (0);
 }
 
-int	syntaxe1_eror(char *line)
+int	syntaxe1_eror(char *line
+)
 {
 	if (check_dq_q(line) == 1)
 		return (1);

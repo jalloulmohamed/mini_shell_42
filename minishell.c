@@ -6,7 +6,7 @@
 /*   By: mjalloul <mjalloul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 22:33:42 by mjalloul          #+#    #+#             */
-/*   Updated: 2022/09/24 16:43:48 by mjalloul         ###   ########.fr       */
+/*   Updated: 2022/09/25 15:10:05 by mjalloul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	main(int ac, char **av, char **env)
 {
 	if (ac != 1 && av[1] != NULL)
 		return (1);
+	g_global.argc = ac;
 	xsh_env(env);
 	sh_loop();
 	free_garbage();

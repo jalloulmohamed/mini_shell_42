@@ -6,7 +6,7 @@
 /*   By: mjalloul <mjalloul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 00:58:28 by mjalloul          #+#    #+#             */
-/*   Updated: 2022/09/24 16:43:11 by mjalloul         ###   ########.fr       */
+/*   Updated: 2022/09/25 15:45:52 by mjalloul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,5 @@ char		*command_path(t_smpcmd smpcmd);
 void		sh_execute(char *line);
 int			nodesize(t_node *lst);
 void		ex_excve(char *line, t_smpcmd smpcmd, char **args);
-void		ex_sub_shell(char *line);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mjalloul <mjalloul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:36:02 by babkar            #+#    #+#             */
-/*   Updated: 2022/09/24 16:14:12 by mjalloul         ###   ########.fr       */
+/*   Updated: 2022/09/25 15:45:03 by mjalloul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	sh_execute(char *line)
 	smpcmd.args = xsh_remove_extra_quotes(smpcmd.args);
 	args = get_args(smpcmd);
 	if (check_par(line))
-		ex_sub_shell(line);
+		lvl_and_or(line);
 	else if (!builtins(line))
 		ex_excve(line, smpcmd, args);
 }

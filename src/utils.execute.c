@@ -6,7 +6,7 @@
 /*   By: mjalloul <mjalloul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 13:04:29 by mjalloul          #+#    #+#             */
-/*   Updated: 2022/09/24 19:59:42 by mjalloul         ###   ########.fr       */
+/*   Updated: 2022/09/25 15:45:00 by mjalloul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,19 +61,6 @@ char	**xsh_env_2d(void)
 	return (env);
 }
 
-void	ex_sub_shell(char *line)
-{
-	int	p;
-
-	p = fork();
-	if (p == 0)
-	{
-		lvl_and_or(line);
-		exit (1);
-	}
-	waitpid(p, &g_global.status, 0);
-}
-
 void	run_command(t_smpcmd smpcmd, char **args, char *line)
 {
 	char	*cmd_path;
@@ -89,7 +76,7 @@ void	run_command(t_smpcmd smpcmd, char **args, char *line)
 		if (cmd_path)
 			execve(cmd_path, args, xsh_env_2d());
 		else
-			ft_putstr_fd(ft_strjoin("xsh: command not found: ", line), 2);
+			ft_putstr_fd(ft_strjoin("minishell: command not found: ", line), 2);
 		exit(127);
 	}
 	waitpid(p, &g_global.exit_status, 0);
@@ -103,8 +90,8 @@ void	ex_excve(char *line, t_smpcmd smpcmd, char **args)
 	int		p;
 	char	*string;
 
-	string = "xsh: No such file or directory: ";
-	if (ft_strchr(line, '/'))
+	string = "minishell: No such file or directory: ";
+	if (line[0] == '.' && line[1] == '/')
 	{
 		g_global.running = 3;
 		p = fork();
@@ -112,6 +99,7 @@ void	ex_excve(char *line, t_smpcmd smpcmd, char **args)
 		{
 			execve(line, args, xsh_env_2d());
 			ft_putstr_fd(ft_strjoin(string, line), 2);
+			exit(127);
 		}
 		waitpid(p, &g_global.exit_status, 0);
 		exit_status();
